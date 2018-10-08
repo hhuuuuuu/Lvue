@@ -3,14 +3,12 @@ import Lvue from "./instance/index";
 const config: any = {
   data(): object {
     return {
-      f: {
-        b: 1
-      }
+      f: [{ a: 1 }]
     };
   },
 
   render(): void {
-    console.log(this.f.b, "render");
+    console.log(this.f[0].a, "render");
   },
 
   beforeCreate(): void {
@@ -22,12 +20,7 @@ const config: any = {
   },
 
   mounted() {
-    this.f.b = 22;
-    setTimeout(() => {
-      this.f = {
-        b: 2
-      };
-    }, 10);
+    this.f[0].a = { v: 333 };
   }
 };
 

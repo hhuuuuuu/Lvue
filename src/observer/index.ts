@@ -2,19 +2,30 @@ import Dep from "./dep";
 import { isObject } from "../utils/getType";
 
 export function observe(value: any | Array<any>) {
-  walk(value);
+  if (Array.isArray(value)) {
+    observeArray(value);
+  } else {
+    walk(value);
+  }
 }
 
 function walk(obj: any) {
+  if (!isObject(obj)) return;
   const keys = Object.keys(obj);
 
   for (let i = 0, l = keys.length; i < l; i++) {
     const key = keys[i];
     const value = obj[key];
     defineReactive(obj, key, value);
-    if (isObject(value)) {
+    if (typeof value === "object") {
       observe(value);
     }
+  }
+}
+
+function observeArray(arr: any) {
+  for (let item of arr) {
+    walk(item);
   }
 }
 
@@ -37,7 +48,7 @@ export function defineReactive(obj: any, key: string, val: any) {
     set(newVal) {
       console.log("setvalue");
       val = newVal;
-      if (isObject(val)) {
+      if (typeof val === "object") {
         observe(val);
       }
       dep.notify();
