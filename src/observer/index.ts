@@ -1,4 +1,5 @@
 import Dep from "./dep";
+import { isObject } from "../utils/getType";
 
 export function observe(value: any | Array<any>) {
   walk(value);
@@ -9,7 +10,11 @@ function walk(obj: any) {
 
   for (let i = 0, l = keys.length; i < l; i++) {
     const key = keys[i];
-    defineReactive(obj, key, obj[key]);
+    const value = obj[key];
+    defineReactive(obj, key, value);
+    if (isObject(value)) {
+      observe(value);
+    }
   }
 }
 
@@ -18,13 +23,11 @@ export function defineReactive(obj: any, key: string, val: any) {
   //   const { get: getter, set: setter } = property;
 
   const dep: Dep = new Dep();
-  console.log(dep);
 
   Object.defineProperty(obj, key, {
     enumerable: true,
     configurable: true,
     get(): any {
-      //const value: any = getter ? getter.call(this) : val;
       console.log("get value");
       if (Dep.target) {
         dep.pushSub();
@@ -33,14 +36,10 @@ export function defineReactive(obj: any, key: string, val: any) {
     },
     set(newVal) {
       console.log("setvalue");
-      //const value = getter ? getter.call(obj) : val;
-      //   if (setter) {
-      //     setter.call(obj, newVal);
-      //   } else {
-      //     val = newVal;
-      //   }
-
       val = newVal;
+      if (isObject(val)) {
+        observe(val);
+      }
       dep.notify();
     }
   });
