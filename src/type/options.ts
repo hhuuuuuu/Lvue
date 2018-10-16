@@ -1,5 +1,6 @@
 export interface options {
   data(): object;
-  render(): void;
+  render(): string | void;
   beforeCreate(): void;
+  el: string;
 }

@@ -1,14 +1,29 @@
 import Lvue from "./instance/index";
 
 const config: any = {
+  el: "#app",
   data(): object {
     return {
-      f: [{ a: 1 }]
+      ff: [7, 8],
+      b: 2,
+      a: {
+        c: 1
+      }
     };
   },
 
-  render(): void {
-    console.log(this.f[0].a, "render");
+  render(): string | void {
+    // return createElement({
+    //   tagName: "div",
+    //   attrs: {
+    //     innerText: this.f[0].a
+    //   }
+    // });
+    return `
+      <%for (a of this.ff){%>
+          <div><%a%></div>
+      <%}%>
+    `;
   },
 
   beforeCreate(): void {
@@ -20,7 +35,9 @@ const config: any = {
   },
 
   mounted() {
-    this.f[0].a = { v: 333 };
+    setTimeout(() => {
+      this.ff = [4, 5];
+    }, 1000);
   }
 };
 

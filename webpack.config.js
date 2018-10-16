@@ -20,7 +20,9 @@ module.exports = {
         }]
     },
     plugins: [
-        new HtmlWebpackPlugin(),
+        new HtmlWebpackPlugin({
+            template: './template/index.html'
+        }),
         new DashboardPlugin()
     ],
     resolve: {
