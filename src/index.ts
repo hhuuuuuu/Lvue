@@ -20,19 +20,20 @@ const config: any = {
     //   }
     // });
     return `
-      <%for (a of this.ff){%>
-          <div><%a%></div>
-      <%}%>
+      <div>
+    {{a}}
+
+    {% if test > 1 %}
+        {{ test }}{{dd}}
+    {% endif %}
+    {{b}}
+</div>
     `;
   },
 
-  beforeCreate(): void {
-    console.log("call beforeCreate");
-  },
+  beforeCreate(): void {},
 
-  created() {
-    console.log("call created");
-  },
+  created() {},
 
   mounted() {
     setTimeout(() => {
@@ -42,7 +43,5 @@ const config: any = {
 };
 
 const vm: any = new Lvue(config);
-
-console.log(vm);
 
 export default Lvue;

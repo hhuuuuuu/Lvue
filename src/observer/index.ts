@@ -39,14 +39,12 @@ export function defineReactive(obj: any, key: string, val: any) {
     enumerable: true,
     configurable: true,
     get(): any {
-      console.log("get value");
       if (Dep.target) {
         dep.pushSub();
       }
       return val;
     },
     set(newVal) {
-      console.log("setvalue");
       val = newVal;
       if (typeof val === "object") {
         observe(val);
