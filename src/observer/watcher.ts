@@ -15,7 +15,7 @@ export default class Watcher {
       this.getter = expOrFn;
     } else if (type === "string") {
       this.getter = function() {
-        console.log("fake wather");
+        console.log("fake watcher");
       };
     }
     this.get();
@@ -31,7 +31,6 @@ export default class Watcher {
   }
 
   update(): void {
-    console.log("update");
     this.get();
   }
 }
