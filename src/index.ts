@@ -8,24 +8,21 @@ const config: any = {
       b: 2,
       a: {
         c: 1
-      }
+      },
+      test: 1
     };
   },
 
   render(): string | void {
-    // return createElement({
-    //   tagName: "div",
-    //   attrs: {
-    //     innerText: this.f[0].a
-    //   }
-    // });
     return `
-      <div>
-    {% if test > 1 %}
+    <div>
         {%if test > 2%}
-          {{aa}}
-        {% end if%}
-    {% endif %}
+              if
+        {%else if test > 1%}
+            else
+        {% else %}
+          88
+        {%endif%}
 </div>
     `;
   },
@@ -36,7 +33,7 @@ const config: any = {
 
   mounted() {
     setTimeout(() => {
-      this.ff = [4, 5];
+      this.a.c = 66;
     }, 1000);
   }
 };
