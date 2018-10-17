@@ -129,7 +129,8 @@ function toAst(template: string): any {
       content = {
         ...content,
         type: 2,
-        children: []
+        children: [],
+        parent: parent
       };
       (parent ? parent.children : root).push(content);
       parent = content;

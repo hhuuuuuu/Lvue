@@ -21,12 +21,11 @@ const config: any = {
     // });
     return `
       <div>
-    {{a}}
-
     {% if test > 1 %}
-        {{ test }}{{dd}}
+        {%if test > 2%}
+          {{aa}}
+        {% end if%}
     {% endif %}
-    {{b}}
 </div>
     `;
   },
